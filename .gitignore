@@ -1,3 +1,8 @@
 maze/maze-copy.py
 foxchickengrain/foxchicken-copy.py
 combinationlock/combinationlock-copy.py
+search-copy.py
+maze-best-first/maze-copy.py
+maze-best-first/search2_copy.py
+maze-astar/maze-copy.py
+maze-astar/search2_copy.py

@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../')
-from search import Node, StackFrontier
+from search import Node, StackFrontier, QueueFrontier
 
 def main():
     """
@@ -13,10 +13,16 @@ def main():
     start = [0, 0, 0, 0]
     target = [1, 1, 1, 1]
     
+    # print(get_neighbors(start))
     path = get_path(start, target)
     
     for state, action in path:
         print(f"state:{state}, action:{action}")
+
+def is_valid(state):
+    """
+    given state return if its valid or not. chicken and grain should not be together and so on
+    """
 
 def get_neighbors(state):
     """
@@ -29,6 +35,8 @@ def get_neighbors(state):
     
     return array of arrays of neighbor states such as from [0, 0, 0, 0] => [[1, 0, 0, 0], [1, 1, 0, 0], ....]
     """
+    
+    
 def get_path(start, target):
     """
     TODO: Your code goes here
@@ -38,12 +46,12 @@ def get_path(start, target):
             no path found
         remove node
         if node state is target state
-            return solution
+            return solution: list of tuples of state, action
             
         explore neighbors and add to frontier
         
     """
-    pass
+    
 
             
 if __name__ == "__main__":

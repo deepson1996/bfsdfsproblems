@@ -1,6 +1,6 @@
 import sys
-sys.path.append('../')
-from search import Node, StackFrontier, QueueFrontier
+# sys.path.append('../')
+from search2 import Node, StackFrontier, QueueFrontier, AStarFrontier
 import numpy as np
 
            
@@ -80,14 +80,23 @@ def get_neighbors(maze,state):
         
     return neighbors
     
-    
+def manhattan_distance(start, end):
+    dist = 0
+    for i in range(len(start)):
+        dist += abs(end[i] - start[i])
+    return dist
+
+def start_to_dist(parent_cost):
+    return parent_cost + 1   
 
 def find_path(maze, start, target):
     """
     Complete the function return list of tuple action and state if found
     """
-    node = Node(state=start, parent=None, action=None)
-    frontier = StackFrontier()
+    h_cost = manhattan_distance(start, target)
+    g_cost = 0
+    node = Node(state=start, parent=None, action=None, h_cost=h_cost, g_cost=g_cost)
+    frontier = AStarFrontier()
     frontier.add(node) 
     
     explored = set()
@@ -115,7 +124,9 @@ def find_path(maze, start, target):
         
         for state in neighbors:
             if (state not in explored) and (not frontier.contains_state(state)):
-                child = Node(state=state, parent=node, action=None)
+                child_h_cost = manhattan_distance(state, target)
+                child_g_cost = start_to_dist(node.g_cost)
+                child = Node(state=state, parent=node, action=None, h_cost=child_h_cost, g_cost=child_g_cost)
                 frontier.add(child)
         
 if __name__ == "__main__":

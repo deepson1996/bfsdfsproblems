@@ -1,10 +1,11 @@
 import sys
 
 class Node:
-    def __init__(self, state, parent, action):
+    def __init__(self, state, parent, action, h_cost):
         self.state = state
         self.parent = parent
         self.action = action
+        self.h_cost = h_cost
     
 class StackFrontier: # For dfs
     def __init__(self):
@@ -35,3 +36,9 @@ class QueueFrontier(StackFrontier): # inherits all other things from stack an
             node = self.frontier[0] # last in first out
             self.frontier = self.frontier[1:]
             return node
+        
+        
+class PriorityQueueFrontier(QueueFrontier):
+    def add(self, node):
+        self.frontier.append(node)
+        self.frontier.sort(key=lambda x:x.h_cost)
